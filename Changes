@@ -1,4 +1,10 @@
 Revision history for Perl extension Exporter::Tidy.
 
+0.06  Sat Apr 19 14:32:19 2003
+        - Added unit tests for _prefix
+
+0.05  Released immediately after 0.04
+        - Fixed some mistakes
+
 0.04  Sat Mar 29 22:53:15 2003
-	- First CPAN release
+        - First CPAN release

@@ -1,8 +1,12 @@
 use lib 't/lib';
-use Test::More tests => 26;
-BEGIN { use_ok('Exporter::Tidy') };
+use Test::More tests => 36;
+BEGIN { require_ok('Exporter::Tidy') };
 
 can_ok 'Exporter::Tidy', 'import';
+
+ok(!defined(&import), 'We are clean');
+Exporter::Tidy->import();
+ok(defined(&import), 'We got an &import');
 
 BEGIN {
     package ET_Test1;
@@ -75,6 +79,31 @@ ok(bar3() eq 'foo',          '_map GLOB/CODE');
 ok($bar3 eq 'foo',           '_map GLOB/SCALAR');
 ok($bar3[0] eq 'foo',        '_map GLOB/ARRAY');
 ok($bar3{foo},               '_map GLOB/HASH');
+
+BEGIN {
+    package ET_Test4;
+    $INC{'ET_Test4.pm'} = 'dummy';
+    use Exporter::Tidy moo => [ qw(foo $foo %foo @foo *bar) ];
+    *foo = sub { 42 };
+    *foo = \ 'forty-two';
+    *foo = [ 1 .. 42 ];
+    *foo = { 42 => 'forty-two' };
+    *bar = sub { 'foo' };
+    *bar = \ 'foo';
+    *bar = [ 'foo' ];
+    *bar = { foo => 1 };
+}
+use ET_Test4
+    _prefix => 'foo_', qw(foo $foo %foo @foo),
+    _prefix => 'bar_', qw(*bar);
+ok(foo_foo() == 42,             '_prefix CODE');
+ok($foo_foo eq 'forty-two',     '_prefix SCALAR');
+ok(@foo_foo == 42,              '_prefix ARRAY');
+ok($foo_foo{42} eq 'forty-two', '_prefix HASH');
+ok(bar_bar() eq 'foo',          '_prefix GLOB/CODE');
+ok($bar_bar eq 'foo',           '_prefix GLOB/SCALAR');
+ok($bar_bar[0] eq 'foo',        '_prefix GLOB/ARRAY');
+ok($bar_bar{foo},               '_prefix GLOB/HASH');
 
 # TODO
 # Test failures
