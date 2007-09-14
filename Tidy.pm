@@ -4,7 +4,7 @@ package Exporter::Tidy;
 # no strict 'refs';
 
 # our
-$VERSION = '0.06';
+$VERSION = '0.07';
 
 sub import {
     my (undef, %tags) = @_;
@@ -200,9 +200,13 @@ the C<use> statement.
 
 =head1 LICENSE
 
-There is no license. This software was released into the public domain. Do with
-it what you want, but on your own risk. The author disclaims any
-responsibility.
+Pick your favourite OSI approved license :)
+
+http://www.opensource.org/licenses/alphabetical
+
+=head1 ACKNOWLEDGEMENTS
+
+Thanks to Aristotle Pagaltzis for suggesting the name Exporter::Tidy.
 
 =head1 AUTHOR
 
