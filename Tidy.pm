@@ -4,7 +4,7 @@ package Exporter::Tidy;
 # no strict 'refs';
 
 # our
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 sub import {
     my (undef, %tags) = @_;

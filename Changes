@@ -1,5 +1,8 @@
 Revision history for Perl extension Exporter::Tidy.
 
+0.08  Thu Jan 6 12:23 2014
+        - README updated to reflect license change.
+
 0.07  Fri Sep 14 13:02 2007
         - Now any-OSI licensed.
 
